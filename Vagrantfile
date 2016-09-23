@@ -12,4 +12,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     s.inline = "/opt/redash/current/setup/vagrant/provision.sh"
     s.privileged = false
   end
+
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory",  "4192"]
+    vb.customize ["modifyvm", :id, "--acpi",    "on"]
+    vb.customize ["modifyvm", :id, "--ioapic",  "on"]
+    vb.customize ["modifyvm", :id, "--cpus",    "4"]
+  end
 end

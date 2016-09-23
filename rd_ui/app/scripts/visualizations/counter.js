@@ -40,7 +40,17 @@
             var targetColName = $scope.visualization.options.targetColName;
 
             if (counterColName) {
-              $scope.counterValue = queryData[rowNumber][counterColName];
+              if (queryData[0]["start_time::filter"] !== undefined || queryData[0]["end_time::filter"] !== undefined) {
+                var counterValue = 0;
+
+                _.each(queryData, function(row) {
+                  counterValue += row[counterColName];
+                });
+
+                $scope.counterValue = counterValue;
+              } else {
+                $scope.counterValue = queryData[rowNumber][counterColName];
+              }
             }
 
             if (targetColName) {

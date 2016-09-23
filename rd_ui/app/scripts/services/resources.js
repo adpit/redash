@@ -176,6 +176,12 @@
               return (memo && _.some(filter.current, function(v) {
                 var value = row[filter.name];
                 if (moment.isMoment(value)) {
+                  // debugger;
+                  if (filter.name == "start_time::filter") {
+                    return value.isAfter(v) || value.isSame(v);
+                  } else if (filter.name = "end_time::filter") {
+                    return value.isBefore(v) || value.isSame(v);
+                  }
                   return value.isSame(v);
                 } else {
                   // We compare with either the value or the String representation of the value,
